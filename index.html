@@ -736,10 +736,13 @@ nav {
 @media (max-width: 860px) {
   .wrap { padding: 0 20px; }
   nav { padding: 14px 20px; }
-  .nav-links { display: none; }
+  /* nav-links: 860px에서는 작게 유지, 480px 이하에서만 숨김 */
+  .nav-links { gap: 14px; }
+  .nav-links a { font-size: 10px; }
   .cover-left { padding: 60px 20px; border-right: none; }
   .cover-inner { grid-template-columns: 1fr; }
-  .cover-right { display: none; }
+  /* cover-right: 숨기지 않고 아래로 쌓이게 처리 */
+  .cover-right { padding: 40px 20px; border-top: 1px solid var(--gray4); }
   .cover-stats { gap: 24px; }
   .toc-grid { grid-template-columns: 1fr; }
   .toc-sidebar { padding: 60px 20px; border-right: none; border-bottom: 1px solid var(--gray4); }
@@ -756,6 +759,11 @@ nav {
   .card-grid { grid-template-columns: 1fr; }
   .backcover-rounds { flex-direction: column; border: none; background: transparent; gap: 8px; }
   .bcround { border: 1px solid var(--gray4); border-radius: 8px; }
+}
+
+@media (max-width: 480px) {
+  .nav-links { display: none; }
+  .cover-right { display: none; }
 }
 </style>
 </head>
@@ -1750,9 +1758,9 @@ nav {
 
       <div class="card r8"><div class="card-accent"></div><div class="card-body"><div class="card-tags"><span class="tag round-tag">8회</span><span class="tag cat">노동</span><span class="tag wip">진행 중</span></div><div class="card-name">비정규직없는 서울대만들기 공동행동</div><div class="card-activity">서울대 노학연대 — 더 강하고 튼튼하게</div><div class="card-meta"><span class="ml">당사자</span><span class="mv">캠퍼스 비정규직 노동자</span><span class="ml">결과물</span><span class="mv">사진전 · 문집 (제작 중)</span></div><hr class="card-divider"><div class="clabel">활동주제</div><div class="ctheme">서울대 비정규직 노동자의 삶을 사진과 글로 기록</div><div class="clabel">활동내용</div><div class="ccontent">서울대 비정규직 노동자의 이야기를 사진과 글로 기록하는 사진전과 문집을 제작합니다. </div></div></div>
 
-      <div class="card r8"><div class="card-accent"></div><div class="card-body"><div class="card-tags"><span class="tag round-tag">8회</span><span class="tag cat">기후 · 노동</span><span class="tag wip">진행 중</span></div><div class="card-name">에코머니나</div><div class="card-activity">기후재난 속 노동을 지키는 현장 실천</div><div class="card-meta"><span class="ml">당사자</span><span class="mv">야외 노동자 · 기후 취약계층</span><span class="ml">결과물</span><span class="mv">현장 보고서 (진행 중)</span></div><hr class="card-divider"><div class="clabel">활동주제</div><div class="ctheme">기후재난이 노동에 미치는 영향 현장 기록</div><div class="clabel">활동내용</div><div class="ccontent">대구 지역 폭염 속 야외 노동자의 노동 환경을 조사하고 기후재난이 노동에 미치는 영향을 기록합니다.</div><div class="card-cont-badge">← 7회에서 이어진 팀 · 생태→기후×노동 확장</div></div></div>
+      <div class="card r8"><div class="card-accent"></div><div class="card-body"><div class="card-tags"><span class="tag round-tag">8회</span><span class="tag cat">기후 · 노동</span><span class="tag wip">진행 중</span></div><div class="card-name">에코머니나</div><div class="card-activity">기후재난 속 노동을 지키는 현장 실천</div><div class="card-meta"><span class="ml">당사자</span><span class="mv">야외 노동자 · 기후 취약계층</span><span class="ml">결과물</span><span class="mv">현장 보고서 (진행 중)</span></div><hr class="card-divider"><div class="clabel">활동주제</div><div class="ctheme">기후재난이 노동에 미치는 영향 현장 기록</div><div class="clabel">활동내용</div><div class="ccontent">대구 지역 야외 노동자와 재난 대응 인력의 환경을 조사하고, 그늘막 설치 등 현장 보호 활동을 병행하며 기후재난이 노동에 미치는 영향을 기록합니다.</div><div class="card-cont-badge">← 7회에서 이어진 팀 · 생태→기후×노동 확장</div></div></div>
 
-      <div class="card r8"><div class="card-accent"></div><div class="card-body"><div class="card-tags"><span class="tag round-tag">8회</span><span class="tag cat">노동 · 젠더</span><span class="tag wip">진행 중</span></div><div class="card-name">서성이다</div><div class="card-activity">여음청 프로젝트</div><div class="card-meta"><span class="ml">당사자</span><span class="mv">여성 청소 노동자</span><span class="ml">결과물</span><span class="mv">전시 (준비 중)</span></div><hr class="card-divider"><div class="clabel">활동주제</div><div class="ctheme">여성×음악×청소노동자(여음청) — 소리로 담은 전시 기획</div><div class="clabel">활동내용</div><div class="ccontent">여성×음악×청소노동자를 주제로 한 '여음청' 프로젝트로, 청소 노동자의 삶과 이야기를 소리로 담은 전시를 기획합니다.</div></div></div>
+      <div class="card r8"><div class="card-accent"></div><div class="card-body"><div class="card-tags"><span class="tag round-tag">8회</span><span class="tag cat">노동 · 젠더</span><span class="tag wip">진행 중</span></div><div class="card-name">서성이다</div><div class="card-activity">여음청 프로젝트</div><div class="card-meta"><span class="ml">당사자</span><span class="mv">여성 청소 노동자</span><span class="ml">결과물</span><span class="mv">전시 (준비 중)</span></div><hr class="card-divider"><div class="clabel">활동주제</div><div class="ctheme">여성×음악×청소노동자(여음청) — 소리로 담은 전시 기획</div><div class="clabel">활동내용</div><div class="ccontent">학내 청소 노동자를 인터뷰하고 노동 현장음을 수집해 전시를 개최하며, 인터뷰 내용을 담은 소책자를 출판합니다.</div></div></div>
 
       <div class="card r8"><div class="card-accent"></div><div class="card-body"><div class="card-tags"><span class="tag round-tag">8회</span><span class="tag cat">성소수자 · 인권</span><span class="tag wip">진행 중</span></div><div class="card-name">성공회대 퀴어문화축제 추진단</div><div class="card-activity">성공회대 퀴어문화축제 4회</div><div class="card-meta"><span class="ml">당사자</span><span class="mv">성소수자 · 캠퍼스 구성원</span><span class="ml">결과물</span><span class="mv">퀴어문화축제 (준비 중)</span></div><hr class="card-divider"><div class="clabel">활동주제</div><div class="ctheme">캠퍼스 내 성소수자 문화 공간 창출</div><div class="clabel">활동내용</div><div class="ccontent">성공회대 캠퍼스 내 성소수자 문화 공간을 만드는 퀴어문화축제 4회를 개최합니다. </div></div></div>
 
@@ -1769,11 +1777,11 @@ nav {
 
       <div class="card r8"><div class="card-accent"></div><div class="card-body"><div class="card-tags"><span class="tag round-tag">8회</span><span class="tag cat">정신건강</span><span class="tag wip">진행 중</span></div><div class="card-name">복실</div><div class="card-activity">정신건강 인식개선 캠페인</div><div class="card-meta"><span class="ml">당사자</span><span class="mv">조현병 당사자 · 가족</span><span class="ml">결과물</span><span class="mv">매거진 · 캠페인 (진행 중)</span></div><hr class="card-divider"><div class="clabel">활동주제</div><div class="ctheme">조현병 낙인 해소와 당사자 서사 기록</div><div class="clabel">활동내용</div><div class="ccontent">조현병에 대한 낙인을 줄이고 당사자 서사를 담은 매거진과 인식개선 캠페인을 진행합니다. </div></div></div>
 
-      <div class="card r8"><div class="card-accent"></div><div class="card-body"><div class="card-tags"><span class="tag round-tag">8회</span><span class="tag cat">성소수자</span><span class="tag wip">진행 중</span></div><div class="card-name">케세라</div><div class="card-activity">웹진 케-세라 회지 제작</div><div class="card-meta"><span class="ml">당사자</span><span class="mv">영남 지역 성소수자</span><span class="ml">결과물</span><span class="mv">웹진 · 회지 (제작 중)</span></div><hr class="card-divider"><div class="clabel">활동주제</div><div class="ctheme">영남 지역 성소수자의 이야기를 웹진과 회지로 기록</div><div class="clabel">활동내용</div><div class="ccontent">영남 지역 성소수자의 이야기와 문화를 담은 웹진과 회지를 제작·배포합니다. </div></div></div>
+      <div class="card r8"><div class="card-accent"></div><div class="card-body"><div class="card-tags"><span class="tag round-tag">8회</span><span class="tag cat">성소수자</span><span class="tag wip">진행 중</span></div><div class="card-name">케세라</div><div class="card-activity">웹진 케-세라 회지 제작</div><div class="card-meta"><span class="ml">당사자</span><span class="mv">영남 지역 성소수자</span><span class="ml">결과물</span><span class="mv">웹진 · 회지 (제작 중)</span></div><hr class="card-divider"><div class="clabel">활동주제</div><div class="ctheme">영남 지역 성소수자의 이야기를 웹진과 회지로 기록</div><div class="clabel">활동내용</div><div class="ccontent">영남 지역 성소수자의 이야기와 문화를 담은 웹진을 매월 발행하고, 실물 회지를 제작·배포합니다. 독자 리뷰 모임을 신설하여 지역 성소수자 커뮤니티와의 연결도 강화합니다.</div></div></div>
 
       <div class="card r8"><div class="card-accent"></div><div class="card-body"><div class="card-tags"><span class="tag round-tag">8회</span><span class="tag cat">청년</span><span class="tag wip">진행 중</span></div><div class="card-name">YEHS</div><div class="card-activity">청년 실패 경험 기록 및 공공 확산</div><div class="card-meta"><span class="ml">당사자</span><span class="mv">청년</span><span class="ml">결과물</span><span class="mv">기록집 (제작 중)</span></div><hr class="card-divider"><div class="clabel">활동주제</div><div class="ctheme">청년의 실패 서사를 수집·기록하여 공공에 확산</div><div class="clabel">활동내용</div><div class="ccontent">청년들의 실패 경험을 수집·기록하고 이를 공공에 확산하는 기록집을 제작합니다. </div></div></div>
 
-      <div class="card r8"><div class="card-accent"></div><div class="card-body"><div class="card-tags"><span class="tag round-tag">8회</span><span class="tag cat">장애</span><span class="tag wip">진행 중</span></div><div class="card-name">지음</div><div class="card-activity">안댕 배리어프리 워커</div><div class="card-meta"><span class="ml">당사자</span><span class="mv">발달장애인</span><span class="ml">결과물</span><span class="mv">독워커 프로그램 (진행 중)</span></div><hr class="card-divider"><div class="clabel">활동주제</div><div class="ctheme">발달장애인이 독워커로 지역사회와 연결되는 프로그램</div><div class="clabel">활동내용</div><div class="ccontent">발달장애인이 독워커로 활동하며 지역사회와 연결되는 프로그램을 운영합니다. </div></div></div>
+      <div class="card r8"><div class="card-accent"></div><div class="card-body"><div class="card-tags"><span class="tag round-tag">8회</span><span class="tag cat">장애</span><span class="tag wip">진행 중</span></div><div class="card-name">지음</div><div class="card-activity">안댕 배리어프리 워커</div><div class="card-meta"><span class="ml">당사자</span><span class="mv">발달장애인</span><span class="ml">결과물</span><span class="mv">독워커 프로그램 (진행 중)</span></div><hr class="card-divider"><div class="clabel">활동주제</div><div class="ctheme">발달장애인이 독워커로 지역사회와 연결되는 프로그램</div><div class="clabel">활동내용</div><div class="ccontent">안산 지역 발달장애인·느린 학습자를 대상으로 반려견 산책 관리 교육을 제공하고, 독워커로 활동하며 지역사회와 연결되는 프로그램을 운영합니다.</div></div></div>
 
     </div><!-- /8회 cards -->
   </div>
