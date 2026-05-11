@@ -2039,5 +2039,138 @@ nav {
 </section>
 
 
+<style>
+/* ── 하단 탭바 ──────────────────────────── */
+#bottom-tabbar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 58px;
+  background: var(--white);
+  border-top: 1px solid var(--gray5);
+  display: flex;
+  z-index: 1000;
+  box-shadow: 0 -2px 12px rgba(0,0,0,.07);
+}
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--gray3);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  transition: color .15s;
+  -webkit-tap-highlight-color: transparent;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tab-item svg {
+  width: 18px; height: 18px;
+  stroke: currentColor; fill: none;
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+.tab-item.active { color: var(--black); }
+.tab-item:active { color: var(--beige-d); }
+body { padding-bottom: 58px; }
+
+/* ── 스크롤 fade-in ──────────────────────── */
+.fade-in-section { opacity: 0; transform: translateY(28px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ── 터치 툴팁 ───────────────────────────── */
+.touch-tooltip {
+  position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%);
+  background: rgba(20,20,20,0.88); color: #fff; font-size: 12px; font-weight: 500;
+  letter-spacing: 0.04em; padding: 8px 16px; border-radius: 20px;
+  pointer-events: none; white-space: nowrap; z-index: 9999;
+  opacity: 0; transition: opacity 0.2s;
+}
+.touch-tooltip.show { opacity: 1; }
+
+/* ── 터치 active 피드백 ──────────────────── */
+@media (hover: none) {
+  .nav-links a:active, .toc-row:active { color: var(--beige-d); }
+  .card:active { box-shadow: 0 6px 24px rgba(0,0,0,.09); transform: translateY(-2px); transition: transform 0.1s, box-shadow 0.1s; }
+  .ig-dot:active { transform: scale(1.3); }
+  .ig-seg:active { opacity: 0.7; }
+}
+</style>
+
+<nav id="bottom-tabbar">
+  <a class="tab-item active" href="#cover">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+    표지
+  </a>
+  <a class="tab-item" href="#about">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    소개
+  </a>
+  <a class="tab-item" href="#archive6">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="13" y2="13"/></svg>
+    6회
+  </a>
+  <a class="tab-item" href="#archive7">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="13" y2="13"/></svg>
+    7회
+  </a>
+  <a class="tab-item" href="#archive8">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="13" y2="13"/></svg>
+    8회
+  </a>
+  <a class="tab-item" href="#interview">
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    인터뷰
+  </a>
+  <a class="tab-item" href="#epilogue">
+    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    에필로그
+  </a>
+</nav>
+
+<div class="touch-tooltip" id="touchTooltip"></div>
+
+<script>
+(function () {
+  /* 1. 스크롤 fade-in */
+  const sections = document.querySelectorAll('section');
+  sections.forEach(el => el.classList.add('fade-in-section'));
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); fadeObserver.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08 });
+  sections.forEach(el => fadeObserver.observe(el));
+
+  /* 2. 터치 툴팁 */
+  const tooltip = document.getElementById('touchTooltip');
+  let tooltipTimer = null;
+  function showTooltip(text) {
+    if (!text) return;
+    tooltip.textContent = text;
+    tooltip.classList.add('show');
+    clearTimeout(tooltipTimer);
+    tooltipTimer = setTimeout(() => tooltip.classList.remove('show'), 2000);
+  }
+  document.querySelectorAll('.ig-dot[title], .ig-seg[title]').forEach(el => {
+    el.addEventListener('touchstart', (e) => { e.preventDefault(); showTooltip(el.getAttribute('title')); }, { passive: false });
+  });
+
+  /* 3. 탭바 active 표시 */
+  const tabItems = document.querySelectorAll('.tab-item');
+  const tabSectionIds = ['cover','about','archive6','archive7','archive8','interview','epilogue'];
+  const sectionEls = tabSectionIds.map(id => document.getElementById(id)).filter(Boolean);
+  const tabObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tabItems.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + entry.target.id));
+      }
+    });
+  }, { threshold: 0.3 });
+  sectionEls.forEach(el => tabObserver.observe(el));
+})();
+</script>
 </body>
 </html>
